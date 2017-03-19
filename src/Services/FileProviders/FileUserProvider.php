@@ -65,7 +65,7 @@ class FileUserProvider implements IUserProvider
 			$albumDir = $userDir . DIRECTORY_SEPARATOR . 'albums';
 
 			if(is_dir($albumDir)) {
-				foreach(Finder::findDirectories("*")->in($albumDir) as $key => $file) {
+				foreach(Finder::findFiles("*")->in($albumDir) as $key => $file) {
 					$user->albums[] = $album = new \StdClass;
 					$album->id = $file->getFilename();
 					
@@ -140,9 +140,10 @@ class FileUserProvider implements IUserProvider
 		}
 
 		FileSystem::createDir($userDir . DIRECTORY_SEPARATOR . 'default');
-		Symlink::create(
-			$albumsDir . DIRECTORY_SEPARATOR . $defaultAlbum->id, 
-			$userDir . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $defaultAlbum->id);
+		//Symlink::create(
+		//	$albumsDir . DIRECTORY_SEPARATOR . $defaultAlbum->id, 
+		//	$userDir . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $defaultAlbum->id);
+		FileSystem::write($userDir . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $defaultAlbum->id, "", NULL);
 		//FileSystem::createDir($userDir . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $defaultAlbum->id);
 		return $this->find($id);
 	}

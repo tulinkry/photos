@@ -58,7 +58,7 @@ class FileAlbumProvider implements IAlbumProvider
 			$photoDir = $albumDir . DIRECTORY_SEPARATOR . 'photos';
 
 			if(is_dir($photoDir)) {
-				foreach(Finder::findDirectories("*")->in($photoDir) as $key => $file) {
+				foreach(Finder::findFiles("*")->in($photoDir) as $key => $file) {
 					$album->photos[] = $photo = new \StdClass;
 					$photo->id = $file->getFilename();
 
@@ -163,12 +163,14 @@ class FileAlbumProvider implements IAlbumProvider
 		FileSystem::createDir($a);
 		$target = $directory . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id;
 		$name = $a . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id;
-		Symlink::create($target, $name);
+		FileSystem::write($name, "", NULL);
+		//Symlink::create($target, $name);
 		//FileSystem::createDir($a . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id);
 		FileSystem::createDir($directory . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'user');
 		$target = $a;
 		$name = $directory . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR . $userId;
-		Symlink::create($target, $name);
+		FileSystem::write($name, "", NULL);
+		//Symlink::create($target, $name);
 		//FileSystem::createDir($directory . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR . $userId);
 	}
 }

@@ -154,13 +154,15 @@ class FilePhotosProvider implements IPhotosProvider
 		$directory = $this->parameters->params['directory'];
 		$a = $directory . DIRECTORY_SEPARATOR . 'albums' . DIRECTORY_SEPARATOR . $albumId;
 		FileSystem::createDir($a . DIRECTORY_SEPARATOR . 'photos');
-		Symlink::create($directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id,
-				$a . DIRECTORY_SEPARATOR . 'photos' .DIRECTORY_SEPARATOR . $id);
+		//Symlink::create($directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id,
+		//		$a . DIRECTORY_SEPARATOR . 'photos' .DIRECTORY_SEPARATOR . $id);
+		FileSystem::write($a . DIRECTORY_SEPARATOR . 'photos' .DIRECTORY_SEPARATOR . $id, "", NULL);
 
 //			FileSystem::createDir($a . DIRECTORY_SEPARATOR . 'photos' .DIRECTORY_SEPARATOR . $id);
 		FileSystem::createDir($directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'album');
-		Symlink::create($a, 
-			$directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'album' . DIRECTORY_SEPARATOR . $albumId);
+		FileSystem::write($directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'album' . DIRECTORY_SEPARATOR . $albumId, "", NULL);
+		//Symlink::create($a, 
+		//	$directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'album' . DIRECTORY_SEPARATOR . $albumId);
 //			FileSystem::createDir($directory . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . $id . DIRECTORY_SEPARATOR . 'album' . DIRECTORY_SEPARATOR . $albumId);
 
 		$this->cache->clean(array(
