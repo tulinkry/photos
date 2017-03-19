@@ -1,0 +1,20 @@
+services:
+	users: 
+		class: Tulinkry\Photos\Services\FileUserProvider
+		inject: yes
+	albums: 
+		class: Tulinkry\Photos\Services\FileAlbumProvider
+		inject: yes
+	photos: 
+		class: Tulinkry\Photos\Services\FilePhotosProvider
+		inject: yes
+	content: 
+		class: Tulinkry\Photos\Services\FileContentProvider
+		inject: yes
+	verify: 
+		class: Tulinkry\Photos\Services\VerifyService
+		inject: yes
+	- Tulinkry\Photos\Forms\FormFactory
+	- Tulinkry\Photos\Forms\UserFormFactory
+	- Tulinkry\Photos\Forms\AlbumFormFactory
+	- Tulinkry\Photos\Forms\UploadFormFactory
