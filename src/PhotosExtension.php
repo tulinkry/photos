@@ -51,8 +51,8 @@ class PhotosExtension extends CompilerExtension
 
         $router = $builder -> getByType( 'Nette\Application\IRouter' ) ?: 'router';
         if ( $builder -> hasDefinition( $router ) ) {
-            foreach($urls as $url => $action) {
-                list($presenter, $action) = $action;
+            foreach($urls as $url => $route) {
+                list($presenter, $action) = $route;
                 $builder -> getDefinition( $router )
                         -> addSetup( '\Tulinkry\DI\PhotosExtension::modifyRouter(?, ?, ?, ?)',
                             [ $url, $presenter, $action, '@self' ] );
